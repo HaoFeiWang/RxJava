@@ -70,6 +70,10 @@ public final class RxJavaPlugins {
     @Nullable
     static volatile Function<? super ConnectableFlowable, ? extends ConnectableFlowable> onConnectableFlowableAssembly;
 
+
+    /**
+     * 输入Observable类型的值,返回Observable类型的值
+     */
     @SuppressWarnings("rawtypes")
     @Nullable
     static volatile Function<? super Observable, ? extends Observable> onObservableAssembly;
@@ -849,8 +853,7 @@ public final class RxJavaPlugins {
     }
 
     /**
-     * Sets the specific hook function.
-     * @param onObservableAssembly the hook function to set, null allowed
+     * 设置这个特定的Hook函数，用于将一个Observable类型的参数转换成另一个Observable类型的参数返回
      */
     @SuppressWarnings("rawtypes")
     public static void setOnObservableAssembly(@Nullable Function<? super Observable, ? extends Observable> onObservableAssembly) {
@@ -1041,10 +1044,7 @@ public final class RxJavaPlugins {
     }
 
     /**
-     * Calls the associated hook function.
-     * @param <T> the value type
-     * @param source the hook's input value
-     * @return the value returned by the hook
+     * 装配
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @NonNull
@@ -1257,13 +1257,9 @@ public final class RxJavaPlugins {
     }
 
     /**
-     * Wraps the call to the function in try-catch and propagates thrown
-     * checked exceptions as RuntimeException.
-     * @param <T> the input type
-     * @param <R> the output type
-     * @param f the function to call, not null (not verified)
-     * @param t the parameter value to the function
-     * @return the result of the function call
+     * 调用Function的apply方法，将输入的类型参数转换成输出的类型参数
+     * @param <T> 输入的值
+     * @param <R> 输出的值
      */
     @NonNull
     static <T, R> R apply(@NonNull Function<T, R> f, @NonNull T t) {

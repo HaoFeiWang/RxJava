@@ -15,16 +15,14 @@ package io.reactivex;
 import io.reactivex.annotations.*;
 
 /**
- * A functional interface that has a {@code subscribe()} method that receives
- * an instance of an {@link ObservableEmitter} instance that allows pushing
- * events in a cancellation-safe manner.
+ * 用于发送数据流的接口
  *
  * @param <T> the value type pushed
  */
 public interface ObservableOnSubscribe<T> {
 
     /**
-     * Called for each Observer that subscribes.
+     * 对每个订阅者发送数据的观察者
      * @param emitter the safe emitter instance, never null
      * @throws Exception on error
      */

@@ -84,12 +84,12 @@ import io.reactivex.schedulers.*;
  *             System.out.println("Done!");
  *         }
  *     });
- * 
+ *
  * Thread.sleep(500);
  * // the sequence now can be cancelled via dispose()
  * d.dispose();
  * </code></pre>
- * 
+ *
  * @param <T>
  *            the type of the items emitted by the Observable
  * @see Flowable
@@ -1512,53 +1512,14 @@ public abstract class Observable<T> implements ObservableSource<T> {
         return fromIterable(sources).concatMapEagerDelayError((Function)Functions.identity(), maxConcurrency, prefetch, false);
     }
 
+
     /**
-     * Provides an API (via a cold Observable) that bridges the reactive world with the callback-style world.
-     * <p>
-     * Example:
-     * <pre><code>
-     * Observable.&lt;Event&gt;create(emitter -&gt; {
-     *     Callback listener = new Callback() {
-     *         &#64;Override
-     *         public void onEvent(Event e) {
-     *             emitter.onNext(e);
-     *             if (e.isLast()) {
-     *                 emitter.onComplete();
-     *             }
-     *         }
-     *
-     *         &#64;Override
-     *         public void onFailure(Exception e) {
-     *             emitter.onError(e);
-     *         }
-     *     };
-     *
-     *     AutoCloseable c = api.someMethod(listener);
-     *
-     *     emitter.setCancellable(c::close);
-     *
-     * });
-     * </code></pre>
-     * <p>
-     * <img width="640" height="200" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="">
-     * <p>
-     * You should call the ObservableEmitter's onNext, onError and onComplete methods in a serialized fashion. The
-     * rest of its methods are thread-safe.
-     * <dl>
-     *  <dt><b>Scheduler:</b></dt>
-     *  <dd>{@code create} does not operate by default on a particular {@link Scheduler}.</dd>
-     * </dl>
-     *
-     * @param <T> the element type
-     * @param source the emitter that is called when an Observer subscribes to the returned {@code Observable}
-     * @return the new Observable instance
-     * @see ObservableOnSubscribe
-     * @see ObservableEmitter
-     * @see Cancellable
+     * 从头创建原生的Observable
      */
     @CheckReturnValue
     @SchedulerSupport(SchedulerSupport.NONE)
     public static <T> Observable<T> create(ObservableOnSubscribe<T> source) {
+        //判空处理
         ObjectHelper.requireNonNull(source, "source is null");
         return RxJavaPlugins.onAssembly(new ObservableCreate<T>(source));
     }

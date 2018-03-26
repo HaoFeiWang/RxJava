@@ -16,18 +16,14 @@ package io.reactivex.functions;
 import io.reactivex.annotations.NonNull;
 
 /**
- * A functional interface that takes a value and returns another value, possibly with a
- * different type and allows throwing a checked exception.
+ * 一个功能接口，用于传入一个值返回另一个值，可能是不同的类型，并且允许抛出异常
  *
- * @param <T> the input value type
- * @param <R> the output value type
+ * @param <T> 输入的值
+ * @param <R> 返回的值
  */
 public interface Function<T, R> {
     /**
-     * Apply some calculation to the input value and return some other value.
-     * @param t the input value
-     * @return the output value
-     * @throws Exception on error
+     * 对输入的值进行处理，然后返回另一个值
      */
     R apply(@NonNull T t) throws Exception;
 }
