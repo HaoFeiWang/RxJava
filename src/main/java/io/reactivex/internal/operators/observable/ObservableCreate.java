@@ -31,6 +31,9 @@ public final class ObservableCreate<T> extends Observable<T> {
         this.source = source;
     }
 
+    /**
+     * subscribe 实际执行的操作
+     */
     @Override
     protected void subscribeActual(Observer<? super T> observer) {
         CreateEmitter<T> parent = new CreateEmitter<T>(observer);
@@ -44,11 +47,7 @@ public final class ObservableCreate<T> extends Observable<T> {
         }
     }
 
-    static final class CreateEmitter<T>
-    extends AtomicReference<Disposable>
-    implements ObservableEmitter<T>, Disposable {
-
-
+    static final class CreateEmitter<T> extends AtomicReference<Disposable> implements ObservableEmitter<T>, Disposable {
         private static final long serialVersionUID = -3434801548987643227L;
 
         final Observer<? super T> observer;

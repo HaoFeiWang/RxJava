@@ -70,9 +70,8 @@ public final class RxJavaPlugins {
     @Nullable
     static volatile Function<? super ConnectableFlowable, ? extends ConnectableFlowable> onConnectableFlowableAssembly;
 
-
     /**
-     * 输入Observable类型的值,返回Observable类型的值
+     * create操作符使用该Function对输入的Observable进行转换
      */
     @SuppressWarnings("rawtypes")
     @Nullable
@@ -853,7 +852,7 @@ public final class RxJavaPlugins {
     }
 
     /**
-     * 设置这个特定的Hook函数，用于将一个Observable类型的参数转换成另一个Observable类型的参数返回
+     * 设置这个特定的Hook函数
      */
     @SuppressWarnings("rawtypes")
     public static void setOnObservableAssembly(@Nullable Function<? super Observable, ? extends Observable> onObservableAssembly) {
@@ -1044,11 +1043,12 @@ public final class RxJavaPlugins {
     }
 
     /**
-     * 装配
+     * 装配Observable，也就是可以对传入的Observable进行包装处理
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @NonNull
     public static <T> Observable<T> onAssembly(@NonNull Observable<T> source) {
+        //如果不主动设置onObservableAssembly，那么onObservableAssembly就为null
         Function<? super Observable, ? extends Observable> f = onObservableAssembly;
         if (f != null) {
             return apply(f, source);

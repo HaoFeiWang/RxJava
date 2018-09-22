@@ -1519,7 +1519,7 @@ public abstract class Observable<T> implements ObservableSource<T> {
     @CheckReturnValue
     @SchedulerSupport(SchedulerSupport.NONE)
     public static <T> Observable<T> create(ObservableOnSubscribe<T> source) {
-        //判空处理
+        //判空处理,如果是空直接抛出空指针异常
         ObjectHelper.requireNonNull(source, "source is null");
         return RxJavaPlugins.onAssembly(new ObservableCreate<T>(source));
     }
@@ -11959,10 +11959,11 @@ public abstract class Observable<T> implements ObservableSource<T> {
     public final void subscribe(Observer<? super T> observer) {
         ObjectHelper.requireNonNull(observer, "observer is null");
         try {
+            //Hock相关
             observer = RxJavaPlugins.onSubscribe(this, observer);
-
             ObjectHelper.requireNonNull(observer, "Plugin returned null Observer");
 
+            //实际订阅
             subscribeActual(observer);
         } catch (NullPointerException e) { // NOPMD
             throw e;
@@ -11979,6 +11980,8 @@ public abstract class Observable<T> implements ObservableSource<T> {
     }
 
     /**
+     * subscribe实际执行的地方，实现类为ObservableCreate
+     *
      * Operator implementations (both source and intermediate) should implement this method that
      * performs the necessary business logic.
      * <p>There is no need to call any of the plugin hooks on the current Observable instance or

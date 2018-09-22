@@ -15,7 +15,7 @@ package io.reactivex;
 import io.reactivex.annotations.*;
 
 /**
- * 用于发送数据流的接口
+ * 用于发送数据流的接口，create操作符的参数类型
  *
  * @param <T> the value type pushed
  */
