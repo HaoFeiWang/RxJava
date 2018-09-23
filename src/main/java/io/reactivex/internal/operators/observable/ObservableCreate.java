@@ -132,9 +132,7 @@ public final class ObservableCreate<T> extends Observable<T> {
      *
      * @param <T> the value type
      */
-    static final class SerializedEmitter<T>
-    extends AtomicInteger
-    implements ObservableEmitter<T> {
+    static final class SerializedEmitter<T> extends AtomicInteger implements ObservableEmitter<T> {
 
         private static final long serialVersionUID = 4883307006032401862L;
 

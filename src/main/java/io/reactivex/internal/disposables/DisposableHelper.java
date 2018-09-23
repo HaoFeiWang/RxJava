@@ -28,8 +28,7 @@ public enum DisposableHelper implements Disposable {
     /**
      * The singleton instance representing a terminal, disposed state, don't leak it.
      */
-    DISPOSED
-    ;
+    DISPOSED;
 
     /**
      * Checks if the given Disposable is the common {@link #DISPOSED} enum value.
