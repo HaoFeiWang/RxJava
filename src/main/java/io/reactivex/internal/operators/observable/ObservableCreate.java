@@ -47,6 +47,9 @@ public final class ObservableCreate<T> extends Observable<T> {
         }
     }
 
+    //AtomicReference中的objectFieldOffset()方法用于获取某个字段相对Java对象的“起始地址”的偏移量
+    //因为继承AtomicReference类，并且没有调用其有参构造器，所以其value属性未被初始化，则objectFiledOffset
+    //方法返回的将是子类对象的地址，操作value也就是操作其子类对象（根据范型控制）
     static final class CreateEmitter<T> extends AtomicReference<Disposable> implements ObservableEmitter<T>, Disposable {
         private static final long serialVersionUID = -3434801548987643227L;
 

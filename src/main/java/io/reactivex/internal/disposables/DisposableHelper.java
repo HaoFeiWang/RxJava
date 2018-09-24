@@ -117,9 +117,21 @@ public enum DisposableHelper implements Disposable {
     public static boolean dispose(AtomicReference<Disposable> field) {
         Disposable current = field.get();
         Disposable d = DISPOSED;
+
+        //TODO  测试：如果不去额外设置value值，current将为null
+        System.out.println("DisposableHelp dispose current = "+current);
+
         if (current != d) {
+            //返回的是旧值
             current = field.getAndSet(d);
+            System.out.println("DisposableHelp dispose current2 = "+current);
+
+            //再执行一遍得到的则是DISPOSABLE，证明上一步设置值是成功的
+            //current = field.get();
+            //System.out.println("DisposableHelp dispose current3 = "+current);
+
             if (current != d) {
+                //需要将旧的Disposable解除订阅
                 if (current != null) {
                     current.dispose();
                 }
