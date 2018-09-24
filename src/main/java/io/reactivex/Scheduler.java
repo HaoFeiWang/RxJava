@@ -510,8 +510,7 @@ public abstract class Scheduler {
         }
     }
 
-    static class PeriodicDirectTask
-    implements Disposable, Runnable, SchedulerRunnableIntrospection {
+    static class PeriodicDirectTask implements Disposable, Runnable, SchedulerRunnableIntrospection {
         final Runnable run;
         @NonNull
         final Worker worker;

@@ -27,6 +27,9 @@ public final class ObservableSubscribeOn<T> extends AbstractObservableWithUpstre
         this.scheduler = scheduler;
     }
 
+    /**
+     * 真正执行绑定的地方
+     */
     @Override
     public void subscribeActual(final Observer<? super T> s) {
         final SubscribeOnObserver<T> parent = new SubscribeOnObserver<T>(s);

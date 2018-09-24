@@ -288,6 +288,9 @@ public final class Schedulers {
     }
 
     /**
+     *
+     * 使用指定的Executor作为调度器
+     *
      * Wraps an {@link Executor} into a new Scheduler instance and delegates {@code schedule()}
      * calls to it.
      * <p>
@@ -335,6 +338,7 @@ public final class Schedulers {
      * @param executor
      *          the executor to wrap
      * @return the new Scheduler wrapping the Executor
+     *
      */
     @NonNull
     public static Scheduler from(@NonNull Executor executor) {
