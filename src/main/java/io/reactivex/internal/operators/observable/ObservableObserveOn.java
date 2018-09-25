@@ -46,8 +46,7 @@ public final class ObservableObserveOn<T> extends AbstractObservableWithUpstream
         }
     }
 
-    static final class ObserveOnObserver<T> extends BasicIntQueueDisposable<T>
-    implements Observer<T>, Runnable {
+    static final class ObserveOnObserver<T> extends BasicIntQueueDisposable<T> implements Observer<T>, Runnable {
 
         private static final long serialVersionUID = 6576896619930983584L;
         final Observer<? super T> actual;
