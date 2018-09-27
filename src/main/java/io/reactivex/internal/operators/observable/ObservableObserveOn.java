@@ -157,6 +157,7 @@ public final class ObservableObserveOn<T> extends AbstractObservableWithUpstream
 
         void schedule() {
             if (getAndIncrement() == 0) {
+                //最终调用的还是该对象的run方法
                 worker.schedule(this);
             }
         }
