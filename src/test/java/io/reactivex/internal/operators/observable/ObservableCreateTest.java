@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
+import org.omg.CORBA.INTERNAL;
 
 import io.reactivex.*;
 import io.reactivex.disposables.*;
@@ -32,6 +33,39 @@ public class ObservableCreateTest {
     @Test(expected = NullPointerException.class)
     public void nullArgument() {
         Observable.create(null);
+    }
+
+    @Test
+    public void mineTest(){
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+                emitter.onComplete();
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     @Test
